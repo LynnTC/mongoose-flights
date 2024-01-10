@@ -18,7 +18,11 @@ const flightSchema = new mongoose.Schema({
     },
     depart: {
         type: Date,
-        default: () => Date.now() + 365 * 24 * 60 * 60 * 1000,
+        set: function(value) {
+            return value === null || value === '' ?
+                new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) :
+                value;
+        },
     },
 });
 
