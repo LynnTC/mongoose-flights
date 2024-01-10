@@ -25,6 +25,6 @@ function create(req, res) {
         })
         .catch(err => {
             console.error(err);
-            res.redirect('/flights/new');
+            res.render('flights/new', {errorMsg: err.message});
         });
 }
