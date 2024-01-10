@@ -16,12 +16,15 @@ function newFlight(req, res){
     res.render('flights/new', { errorMsg: ''});
 }
 
-async function create(req, res){
-    try {
-        await Flight.create(req.body);
-        res.redirect('/flights');
-    } catch(err) {
-        console.log(err);
-        res.render('flights/new', {errorMsg: err.message});
-    }
+function create(req, res) {
+    const flight = new Flight(req.body);
+    flight.save()
+        .then(() => {
+            console.log(flight);
+            res.redirect('/flights');
+        })
+        .catch(err => {
+            console.error(err);
+            res.redirect('/flights/new');
+        });
 }
