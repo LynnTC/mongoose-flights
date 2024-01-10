@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const flightSchema = new mongoose.Schema({
-    airline: { 
-        type: String, 
+    airline: {
+        type: String,
         enum: ['American', 'Southwest', 'United'],
     },
     airport: {
         type: String,
         enum: ["AUS", "DFW", "DEN", "LAX", "SAN", "PDX"],
     },
-    flightNo:{
+    flightNo: {
         type: Number,
         min: 10,
         max: 9999,
@@ -18,11 +18,7 @@ const flightSchema = new mongoose.Schema({
     },
     depart: {
         type: Date,
-        set: function(value) {
-            return value === null || value === '' ?
-                new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) :
-                value;
-        },
+        default: function () { return Date.now() + (365 * 24 * 60 * 60000) }
     },
 });
 
