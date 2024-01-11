@@ -1,0 +1,64 @@
+<%- include('../partials/header') %>
+
+    <ul>
+        <h1>Current Flight</h1>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>Airline</th>
+                    <th>Airport</th>
+                    <th>Flight No.</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                      <td><%= flight.airline %></td>
+                      <td><%= flight.airport %></td>
+                      <td><%= flight.flightNo %></td>
+                      <td><%= flight.depart.toLocaleString() %></td>
+                    </tr>
+                <% flight.arrival.forEach(function(a) { %>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <%= a.airport %>
+                    </td>
+                    <td></td>
+                    <td>Departure Time: <%= a.depart.toLocaleString() %>
+                    </td>
+                </tr>
+                <% }); %>
+                <tr>
+                </tr>
+                <tr>
+                    <td><label>
+                        </label></td>
+                    <form method="POST" action="/flights/<%= flight._id %>/arrivals">
+                        <td>Arrival:
+                            <select name="airport">
+                                <option value="AUS">AUS</option>
+                                <option value="DFW">DFW</option>
+                                <option value="DEN">DEN</option>
+                                <option value="LAX">LAX</option>
+                                <option value="PDX">PDX</option>
+                                <option value="SAN">SAN</option>
+                            </select>
+                        </td>
+                        <td></td>
+                        <td>
+                            <label>Arrival Time:
+                                <input type="datetime-local" name="depart">
+                            </label>
+                        </td>
+                        <td>
+                            <input type="submit" value="Add Arrival">
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </ul>
+
+    <%- include('../partials/footer') %>
