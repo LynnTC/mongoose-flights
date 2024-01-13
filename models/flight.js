@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ticketSchema = require('./ticket');
 
 const arrivalSchema = new Schema({
     airport: {
@@ -29,6 +30,10 @@ const flightSchema = new mongoose.Schema({
         type: Date,
         default: function () { return Date.now() + (365 * 24 * 60 * 60000) }
     },
+    tickets: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Ticket'
+    }],
     arrival: [arrivalSchema]
 });
 
